@@ -1,3 +1,7 @@
+/**
+ * @author umair-ali-bhutto
+ * Simple Javascript Project For Counting Characters, Words And Lines 
+ */
 document.addEventListener('DOMContentLoaded', function() {
     const textArea = document.getElementById('textArea');
     const characterCountSpan = document.getElementById('characterCount');
