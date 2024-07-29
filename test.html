@@ -1,201 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Character, Word, and Line Counter</title>
-    
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #121212;
-    color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    transition: background-color 0.3s, color 0.3s;
-}
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
 
-.container {
-    background: #1f1f1f;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    width: 90%;
-    max-width: 600px;
-    box-sizing: border-box;
-    transition: background 0.3s;
-}
+        .container {
+            background: #1f1f1f;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 600px;
+            box-sizing: border-box;
+            transition: background 0.3s;
+        }
 
-#textArea {
-    width: 100%;
-    height: 200px;
-    padding: 15px;
-    font-size: 16px;
-    background-color: #2c2c2c;
-    color: #ffffff;
-    border: 1px solid #444;
-    border-radius: 8px;
-    box-sizing: border-box;
-    resize: none;
-    margin-bottom: 15px;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-}
+        #textArea {
+            width: 100%;
+            height: 200px;
+            padding: 15px;
+            font-size: 16px;
+            background-color: #2c2c2c;
+            color: #ffffff;
+            border: 1px solid #444;
+            border-radius: 8px;
+            box-sizing: border-box;
+            resize: none;
+            margin-bottom: 15px;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
 
-#textArea::-webkit-scrollbar {
-    width: 12px;
-}
+        #textArea::-webkit-scrollbar {
+            width: 12px;
+        }
 
-#textArea::-webkit-scrollbar-track {
-    background: #1f1f1f;
-    border-radius: 8px;
-}
+        #textArea::-webkit-scrollbar-track {
+            background: #1f1f1f;
+            border-radius: 8px;
+        }
 
-#textArea::-webkit-scrollbar-thumb {
-    background: #bb86fc;
-    border-radius: 8px;
-}
+        #textArea::-webkit-scrollbar-thumb {
+            background: #bb86fc;
+            border-radius: 8px;
+        }
 
-#textArea::-webkit-scrollbar-thumb:hover {
-    background: #a255ff;
-}
+        #textArea::-webkit-scrollbar-thumb:hover {
+            background: #a255ff;
+        }
 
-#textArea:focus {
-    outline: none;
-    border-color: #bb86fc;
-}
+        #textArea:focus {
+            outline: none;
+            border-color: #bb86fc;
+        }
 
-#counts {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    flex-wrap: wrap;
-}
+        #counts {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
 
-.count-box {
-    background: #bb86fc;
-    color: #121212;
-    padding: 10px;
-    border-radius: 8px;
-    flex: 1;
-    text-align: center;
-    box-sizing: border-box;
-    min-width: 100px;
-    transition: transform 0.3s, background 0.3s, color 0.3s;
-}
+        .count-box {
+            background: #bb86fc;
+            color: #121212;
+            padding: 10px;
+            border-radius: 8px;
+            flex: 1;
+            text-align: center;
+            box-sizing: border-box;
+            min-width: 100px;
+            transition: transform 0.3s, background 0.3s, color 0.3s;
+        }
 
-.count-box:hover {
-    transform: scale(1.05);
-}
+        .count-box:hover {
+            transform: scale(1.05);
+        }
 
-.count-box span {
-    font-weight: 600;
-}
+        .count-box span {
+            font-weight: 600;
+        }
 
-@media (max-width: 600px) {
-    #counts {
-        flex-direction: column;
-    }
+        @media (max-width: 600px) {
+            #counts {
+                flex-direction: column;
+            }
 
-    .count-box {
-        margin-bottom: 10px;
-    }
-}
+            .count-box {
+                margin-bottom: 10px;
+            }
+        }
 
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-}
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
 
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
 
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: 0.4s;
-    border-radius: 34px;
-}
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 34px;
+        }
 
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: 0.4s;
-    border-radius: 50%;
-}
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
 
-input:checked + .slider {
-    background-color: #2196F3;
-}
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
 
-input:checked + .slider:before {
-    transform: translateX(26px);
-}
+        input:checked+.slider:before {
+            transform: translateX(26px);
+        }
 
-.toggle-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
 
-#toggleLabel {
-    margin-left: 10px;
-    font-weight: 600;
-}
+        #toggleLabel {
+            margin-left: 10px;
+            font-weight: 600;
+        }
 
-.light-mode body {
-    background-color: #f0f2f5;
-    color: #121212;
-}
+        .light-mode body {
+            background-color: #f0f2f5;
+            color: #121212;
+        }
 
-.light-mode .container {
-    background: #ffffff;
-}
+        .light-mode .container {
+            background: #ffffff;
+        }
 
-.light-mode #textArea {
-    background-color: #ffffff;
-    color: #121212;
-    border-color: #dcdcdc;
-}
+        .light-mode #textArea {
+            background-color: #ffffff;
+            color: #121212;
+            border-color: #dcdcdc;
+        }
 
-.light-mode #textArea:focus {
-    border-color: #007bff;
-}
+        .light-mode #textArea:focus {
+            border-color: #007bff;
+        }
 
-.light-mode #textArea::-webkit-scrollbar-track {
-    background: #ffffff;
-}
+        .light-mode #textArea::-webkit-scrollbar-track {
+            background: #ffffff;
+        }
 
-.light-mode #textArea::-webkit-scrollbar-thumb {
-    background: #007bff;
-}
+        .light-mode #textArea::-webkit-scrollbar-thumb {
+            background: #007bff;
+        }
 
-.light-mode .count-box {
-    background: #007bff;
-    color: #ffffff;
-}
-
+        .light-mode .count-box {
+            background: #007bff;
+            color: #ffffff;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="toggle-container">
@@ -212,41 +213,42 @@ input:checked + .slider:before {
             <div class="count-box">Lines: <span id="lineCount">0</span></div>
         </div>
     </div>
-<script>
-    /**
- * Simple Javascript Project For Counting Characters, Words And Lines 
- */
-document.addEventListener('DOMContentLoaded', function() {
-    const textArea = document.getElementById('textArea');
-    const characterCountSpan = document.getElementById('characterCount');
-    const wordCountSpan = document.getElementById('wordCount');
-    const lineCountSpan = document.getElementById('lineCount');
-    const modeToggle = document.getElementById('modeToggle');
-    const toggleLabel = document.getElementById('toggleLabel');
-    const body = document.body;
+    <script>
+        /**
+     * Simple Javascript Project For Counting Characters, Words And Lines 
+     */
+        document.addEventListener('DOMContentLoaded', function () {
+            const textArea = document.getElementById('textArea');
+            const characterCountSpan = document.getElementById('characterCount');
+            const wordCountSpan = document.getElementById('wordCount');
+            const lineCountSpan = document.getElementById('lineCount');
+            const modeToggle = document.getElementById('modeToggle');
+            const toggleLabel = document.getElementById('toggleLabel');
+            const body = document.body;
 
-    textArea.addEventListener('input', function() {
-        const text = textArea.value;
-        const characterCount = text.length;
-        const wordCount = text.trim().split(/\s+/).length;
-        const lineCount = text.split('\n').length;
+            textArea.addEventListener('input', function () {
+                const text = textArea.value;
+                const characterCount = text.length;
+                const wordCount = text.trim().split(/\s+/).length;
+                const lineCount = text.split('\n').length;
 
-        characterCountSpan.textContent = characterCount;
-        wordCountSpan.textContent = wordCount;
-        lineCountSpan.textContent = lineCount;
-    });
+                characterCountSpan.textContent = characterCount;
+                wordCountSpan.textContent = wordCount;
+                lineCountSpan.textContent = lineCount;
+            });
 
-    modeToggle.addEventListener('change', function() {
-        if (modeToggle.checked) {
-            body.classList.add('light-mode');
-            toggleLabel.textContent = 'Light Mode';
-        } else {
-            body.classList.remove('light-mode');
-            toggleLabel.textContent = 'Dark Mode';
-        }
-    });
-});
+            modeToggle.addEventListener('change', function () {
+                if (modeToggle.checked) {
+                    body.classList.add('light-mode');
+                    toggleLabel.textContent = 'Light Mode';
+                } else {
+                    body.classList.remove('light-mode');
+                    toggleLabel.textContent = 'Dark Mode';
+                }
+            });
+        });
 
-</script>
+    </script>
 </body>
+
 </html>

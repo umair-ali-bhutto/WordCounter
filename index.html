@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Character, Word, and Line Counter</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container">
+        <div class="toggle-container">
+            <label class="switch">
+                <input type="checkbox" id="modeToggle">
+                <span class="slider round"></span>
+            </label>
+            <div id="toggleLabel">Dark Mode</div>
+        </div>
         <textarea id="textArea" placeholder="Type something here..."></textarea>
         <div id="counts">
             <div class="count-box">Characters: <span id="characterCount">0</span></div>
@@ -18,4 +27,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
